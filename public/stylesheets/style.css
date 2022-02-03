@@ -10,7 +10,7 @@
 
 /* ----- Header Styles ----- */
 
-header {
+header.site-header {
   position: fixed;
   top: 0;
   width: 100%;
@@ -21,8 +21,8 @@ header {
 .header-content {
   display: flex;
   justify-content: space-between;
-  max-width: 60%;
   min-width: 600px;
+  max-width: 60%;
   margin: 0 auto;
   align-items: center;
   height: 100%;
@@ -63,8 +63,8 @@ header {
   font-weight: bold;
 }
 
-.header-content span:nth-child(1) {
-
+.error-msg {
+  margin-top: 5rem;
 }
 
 
@@ -72,5 +72,26 @@ header {
 /* ----- Catalog Styles -----*/
 
 main {
+  width: 100%;
+  min-height: 100vh;
+  background-color:rgba(61, 61, 61, 0.4)
+}
+
+.main-content {
+  min-width: 600px;
+  max-width: 60%;
+  margin: auto;
   margin-top: 5rem;
+  padding: 2rem 0;
+}
+
+.main-header {
+  text-align: center;
+}
+
+.main-header h1 {
+  font-size: 2.25rem;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  color: mistyrose;
+  font-weight: bold;
 }
