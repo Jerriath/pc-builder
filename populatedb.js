@@ -11,10 +11,9 @@ if (!userArgs[0].startsWith('mongodb')) {
 }
 */
 var async = require('async')
-var Book = require('./models/book')
-var Author = require('./models/author')
-var Genre = require('./models/genre')
-var BookInstance = require('./models/bookInstance')
+var Component = require('./models/component')
+var Category = require('./models/category')
+var Manufacturer = require('./models/manufacturer')
 
 
 var mongoose = require('mongoose');
@@ -24,112 +23,97 @@ mongoose.Promise = global.Promise;
 var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'MongoDB connection error:'));
 
-var authors = []
-var genres = []
-var books = []
-var bookinstances = []
+var components = []
+var categories = []
+var manufacturers = []
 
-function authorCreate(first_name, family_name, d_birth, d_death, cb) {
-  authordetail = {first_name:first_name , family_name: family_name }
-  if (d_birth != false) authordetail.date_of_birth = d_birth
-  if (d_death != false) authordetail.date_of_death = d_death
+function categoryCreate(name, description, cb) {
+  categoryDetail = {name: name , description: description }
   
-  var author = new Author(authordetail);
+  var category = new Category(categoryDetail);
        
-  author.save(function (err) {
+  category.save(function (err) {
     if (err) {
       cb(err, null)
       return
     }
-    console.log('New Author: ' + author);
-    authors.push(author)
-    cb(null, author)
+    console.log('New Category: ' + category);
+    categories.push(category)
+    cb(null, category)
   }  );
 }
 
-function genreCreate(name, cb) {
-  var genre = new Genre({ name: name });
+function manufacturerCreate(name, description, cb) {
+  var manufacturer = new Manufacturer({ name: name, description: description });
        
-  genre.save(function (err) {
+  manufacturer.save(function (err) {
     if (err) {
       cb(err, null);
       return;
     }
-    console.log('New Genre: ' + genre);
-    genres.push(genre)
-    cb(null, genre);
+    console.log('New Manufacturer: ' + manufacturer);
+    genres.push(manufacturer)
+    cb(null, manufacturer);
   }   );
 }
 
-function bookCreate(title, summary, isbn, author, genre, cb) {
-  bookdetail = { 
-    title: title,
-    summary: summary,
-    author: author,
-    isbn: isbn
+function componentCreate(name, image, price, category, manufacturer, cb) {
+  componentDetail = { 
+    name: name,
+    image: image,
+    price: price,
+    category: category,
+    manufacturer: manufacturer
   }
-  if (genre != false) bookdetail.genre = genre
+  if (category != false) componentDetail.category = category
+  if (manufacturer != false) componentDetail.manufacturer = manufacturer
     
-  var book = new Book(bookdetail);    
-  book.save(function (err) {
+  var component = new Component(componentDetail);    
+  component.save(function (err) {
     if (err) {
       cb(err, null)
       return
     }
-    console.log('New Book: ' + book);
-    books.push(book)
-    cb(null, book)
+    console.log('New Component: ' + component);
+    components.push(compoennt)
+    cb(null, component)
   }  );
 }
 
 
-function bookInstanceCreate(book, imprint, due_back, status, cb) {
-  bookinstancedetail = { 
-    book: book,
-    imprint: imprint
-  }    
-  if (due_back != false) bookinstancedetail.due_back = due_back
-  if (status != false) bookinstancedetail.status = status
-    
-  var bookinstance = new BookInstance(bookinstancedetail);    
-  bookinstance.save(function (err) {
-    if (err) {
-      console.log('ERROR CREATING BookInstance: ' + bookinstance);
-      cb(err, null)
-      return
-    }
-    console.log('New BookInstance: ' + bookinstance);
-    bookinstances.push(bookinstance)
-    cb(null, book)
-  }  );
-}
-
-
-function createGenreAuthors(cb) {
+function createCategoryManufacturers(cb) {
     async.series([
         function(callback) {
-          authorCreate('Patrick', 'Rothfuss', '1973-06-06', false, callback);
+          let description = "Founded in 1969 as a Silicon Valley start-up, the AMD journey began with dozens of employees focused on leading-edge semiconductor products. From those modest beginnings, AMD has grown into a global company achieving many important industry firsts along the way. AMD today develops high-performance computing and visualization products to solve some of the world’s toughest and most interesting challenges.";
+          manufacturerCreate('AMD', description, callback);
         },
         function(callback) {
-          authorCreate('Ben', 'Bova', '1932-11-8', false, callback);
+          let description = "Nvidia Corporation is an American multinational technology company incorporated in Delaware and based in Santa Clara, California. It designs graphics processing units (GPUs) for the gaming and professional markets, as well as system on a chip units (SoCs) for the mobile computing and automotive market.";
+          manufacturerCreate('Nvidia', description, callback);
         },
         function(callback) {
-          authorCreate('Isaac', 'Asimov', '1920-01-02', '1992-04-06', callback);
+          let description = "Intel Corporation, stylized as intel, is an American multinational corporation and technology company headquartered in Santa Clara, California. It is the world's largest semiconductor chip manufacturer by revenue, and is the developer of the x86 series of microprocessors, the processors found in most personal computers (PCs).";
+          manufacturerCreate('Intel', description, callback);
         },
         function(callback) {
-          authorCreate('Bob', 'Billings', false, false, callback);
+          let description = "Corsair designs and sells a range of products for computers, including high-speed DRAM modules, ATX power supplies (PSUs), USB flash drives (UFDs), CPU/GPU and case cooling, gaming peripherals (such as keyboards or computer mice), computer cases, solid-state drives (SSDs), and speakers.";
+          manufacturerCreate('Corsair', description, callback);
         },
         function(callback) {
-          authorCreate('Jim', 'Jones', '1971-12-16', false, callback);
+          let description = "A central processing unit (CPU), also called a central processor, main processor or just processor, is the electronic circuitry that executes instructions comprising a computer program. The CPU performs basic arithmetic, logic, controlling, and input/output (I/O) operations specified by the instructions in the program.";
+          categoryCreate('CPU', description, callback);
         },
         function(callback) {
-          genreCreate("Fantasy", callback);
+          let description = "A graphics processing unit (GPU) is a specialized electronic circuit designed to rapidly manipulate and alter memory to accelerate the creation of images in a frame buffer intended for output to a display device. GPUs are used in embedded systems, mobile phones, personal computers, workstations, and game consoles.";
+          categoryCreate("GPU", description, callback);
         },
         function(callback) {
-          genreCreate("Science Fiction", callback);
+          let description = "A motherboard is the main printed circuit board (PCB) in general-purpose computers and other expandable systems. It holds and allows communication between many of the crucial electronic components of a system, such as the central processing unit (CPU) and memory, and provides connectors for other peripherals.";
+          categoryCreate("Motherboard", description, callback);
         },
         function(callback) {
-          genreCreate("French Poetry", callback);
+          let description = "Random-access memory is a form of computer memory that can be read and changed in any order, typically used to store working data and machine code.";
+          categoryCreate("RAM", description, callback);
         },
         ],
         // optional callback
@@ -137,7 +121,7 @@ function createGenreAuthors(cb) {
 }
 
 
-function createBooks(cb) {
+function createComponents(cb) {
     async.parallel([
         function(callback) {
           bookCreate('The Name of the Wind (The Kingkiller Chronicle, #1)', 'I have stolen princesses back from sleeping barrow kings. I burned down the town of Trebon. I have spent the night with Felurian and left with both my sanity and my life. I was expelled from the University at a younger age than most people are allowed in. I tread paths by moonlight that others fear to speak of during day. I have talked to Gods, loved women, and written songs that make the minstrels weep.', '9781473211896', authors[0], [genres[0],], callback);
@@ -162,47 +146,6 @@ function createBooks(cb) {
         }
         ],
         // optional callback
-        cb);
-}
-
-
-function createBookInstances(cb) {
-    async.parallel([
-        function(callback) {
-          bookInstanceCreate(books[0], 'London Gollancz, 2014.', false, 'Available', callback)
-        },
-        function(callback) {
-          bookInstanceCreate(books[1], ' Gollancz, 2011.', false, 'Loaned', callback)
-        },
-        function(callback) {
-          bookInstanceCreate(books[2], ' Gollancz, 2015.', false, false, callback)
-        },
-        function(callback) {
-          bookInstanceCreate(books[3], 'New York Tom Doherty Associates, 2016.', false, 'Available', callback)
-        },
-        function(callback) {
-          bookInstanceCreate(books[3], 'New York Tom Doherty Associates, 2016.', false, 'Available', callback)
-        },
-        function(callback) {
-          bookInstanceCreate(books[3], 'New York Tom Doherty Associates, 2016.', false, 'Available', callback)
-        },
-        function(callback) {
-          bookInstanceCreate(books[4], 'New York, NY Tom Doherty Associates, LLC, 2015.', false, 'Available', callback)
-        },
-        function(callback) {
-          bookInstanceCreate(books[4], 'New York, NY Tom Doherty Associates, LLC, 2015.', false, 'Maintenance', callback)
-        },
-        function(callback) {
-          bookInstanceCreate(books[4], 'New York, NY Tom Doherty Associates, LLC, 2015.', false, 'Loaned', callback)
-        },
-        function(callback) {
-          bookInstanceCreate(books[0], 'Imprint XXX2', false, false, callback)
-        },
-        function(callback) {
-          bookInstanceCreate(books[1], 'Imprint XXX3', false, false, callback)
-        }
-        ],
-        // Optional callback
         cb);
 }
 
