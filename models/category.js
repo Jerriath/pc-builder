@@ -6,8 +6,8 @@ const Schema = mongoose.Schema;
 // Defining the CategorySchema
 const CategorySchema = new Schema(
     {
-        name: { type: string, required: true },
-        description: { type: string, required: true },
+        name: { type: String, required: true },
+        description: { type: String, required: true },
 
     }
 );

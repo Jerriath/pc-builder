@@ -8,7 +8,7 @@ const ComponentSchema = new Schema(
         price: { type: Number, required: true, min: 0 },
         category: { type: Schema.Types.ObjectId, ref: "Category", required: true },
         manufacturer: { type: Schema.Types.ObjectId, ref: "Manufacturer", required: true },
-        img: { type: string }
+        img: { type: String }
     }
 )
 

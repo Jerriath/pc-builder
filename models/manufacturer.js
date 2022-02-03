@@ -9,6 +9,6 @@ const ManufacturerSchema = new Schema(
 )
 
 // Virtual for manufacturer's URL
-ManufacturerSchema.virtual.get(function() {
+ManufacturerSchema.virtual("url").get(function() {
     return `/catalog/manufacturer/${this._id}`;
 })

@@ -2,7 +2,7 @@ const express = require("express");
 const router = express.Router();
 
 // Require controller modules
-const component_controller = require("../controllers/component_controller");
+const component_controller = require("../controllers/componentController");
 const manufacturer_controller = require("../controllers/manufacturerController");
 const category_controller = require("../controllers/categoryController");
 
@@ -19,10 +19,10 @@ router.get("/component/create", component_controller.component_create_get);
 router.post("/component/create", component_controller.component_create_post);
 
 // GET request to delete Component
-router.post("/component/:id/delete", component_controller.componnt_delete_get);
+router.post("/component/:id/delete", component_controller.component_delete_get);
 
 // POST request to delete Component
-router.post("/component/:id/delete", component_controller.compontent_delete_post);
+router.post("/component/:id/delete", component_controller.component_delete_post);
 
 // GET request to update Component
 router.get("/component/:id/update", component_controller.component_update_get);
@@ -89,3 +89,5 @@ router.get('/category/:id', category_controller.category_detail);
 
 // GET request for list of all categorys.
 router.get('/categories', category_controller.category_list);
+
+module.exports = router;

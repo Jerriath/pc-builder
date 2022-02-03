@@ -7,34 +7,34 @@ const Manufacturer = require("../models/manufacturer");
 const async = require("async");
 const { body, validationResults } = require("express-validator");
 
-exports.manufacturer_list = function(req, res) {
+exports.category_list = function(req, res) {
     res.send("NOT IMPLEMENTED YET");
 }
 
-exports.manufacturer_detail = function(req, res) {
+exports.category_detail = function(req, res) {
     res.send("NOT IMPLEMENTED YET");
 }
 
-exports.manufacturer_create_get = function(req, res) {
+exports.category_create_get = function(req, res) {
     res.send("NOT IMPLEMENTED YET");
 }
 
-exports.manufacturer_create_post = function(req, res) {
+exports.category_create_post = function(req, res) {
     res,send("NOT IMPLETMENTED YET");
 }
 
-exports.manufacturer_delete_get = function(req, res) {
+exports.category_delete_get = function(req, res) {
     res.send("NOT IMPLEMENTED YET");
 }
 
-exports.manufacturer_delete_post = function(req, res) {
+exports.category_delete_post = function(req, res) {
     res.send("NOT IMPLEMENTED YET");
 }
 
-exports.manufacturer_update_get = function(req, res) {
+exports.category_update_get = function(req, res) {
     res.send("NOT IMPLEMEMENTED YET");
 }
 
-exports.manufacturer_update_post = function(req, res) {
+exports.category_update_post = function(req, res) {
     res.send("NOT IMPLEMENTED YET");
 }
