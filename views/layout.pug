@@ -2,6 +2,16 @@ doctype html
 html
   head
     title= title
+    meta(charset="utf-8")
+    meta(name="viewport", content="width=device-width, initial-scale=1")
+    link(rel="stylesheet", href="/stylesheets/cssreset.css")
     link(rel='stylesheet', href='/stylesheets/style.css')
   body
+    header
+      .header-content 
+        h1
+          a(href="/catalog")
+            span PC - Builder
+        button.dropdown 
+
     block content

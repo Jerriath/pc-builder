@@ -8,7 +8,7 @@ const async = require("async");
 const { body, validationResults } = require("express-validator");
 
 exports.index = function(req, res) {
-    res.send("NOT IMPLEMENTED YET");
+    res.render("index", { title: "Component Catalog" })
 }
 
 exports.component_list = function(req, res) {

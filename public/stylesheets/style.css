@@ -1,8 +1,76 @@
-body {
-  padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+/*---------- Table of Contents ----------
+
+  I.   Header Styles
+  II.  Catalog Styles
+  III. 
+
+  ---------- Table of Contents ----------*/
+
+
+
+/* ----- Header Styles ----- */
+
+header {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  height: 5rem;
+  background-color: lightslategray;
 }
 
-a {
-  color: #00B7FF;
+.header-content {
+  display: flex;
+  justify-content: space-between;
+  max-width: 60%;
+  min-width: 600px;
+  margin: 0 auto;
+  align-items: center;
+  height: 100%;
+}
+
+.dropdown {
+  background: url("../images//svgs/menu.svg");
+  background-repeat: no-repeat;
+  width: 30px;
+  height: 30px;
+  border: 0;
+  border-radius: 10px;
+  background-position: center;
+  transition: background-color 0.2s linear;
+  cursor: pointer;
+}
+
+.dropdown:hover {
+  background-color: rgba(61, 61, 61, 0.2);
+}
+
+.header-content a {
+  text-decoration: none;
+  font-size: 2rem;
+  padding: 0.5rem;
+  border-radius: 10px;
+  transition: background-color 0.2s linear;
+}
+
+.header-content a:hover {
+  background-color: rgba(61, 61, 61, 0.2);
+}
+
+.header-content span {
+  font-size: 2rem;
+  color: mistyrose;
+  font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  font-weight: bold;
+}
+
+.header-content span:nth-child(1) {
+
+}
+
+
+
+/* ----- Catalog Styles -----*/
+
+main {
+  margin-top: 5rem;
 }
