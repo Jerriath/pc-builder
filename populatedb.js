@@ -11,9 +11,9 @@ if (!userArgs[0].startsWith('mongodb')) {
 }
 */
 var async = require('async')
-var Component = require('./models/component')
 var Category = require('./models/category')
 var Manufacturer = require('./models/manufacturer')
+var Component = require('./models/component')
 
 
 var mongoose = require('mongoose');
@@ -52,30 +52,32 @@ function manufacturerCreate(name, description, cb) {
       return;
     }
     console.log('New Manufacturer: ' + manufacturer);
-    genres.push(manufacturer)
+    manufacturers.push(manufacturer)
     cb(null, manufacturer);
   }   );
 }
 
-function componentCreate(name, image, price, category, manufacturer, cb) {
+function componentCreate(name, description, price, category, manufacturer, cb) {
   componentDetail = { 
     name: name,
-    image: image,
+    description: description,
+    image: null,
     price: price,
     category: category,
     manufacturer: manufacturer
   }
+  console.log(name + " " + description + " " + price + " " + category + " " + manufacturer);
   if (category != false) componentDetail.category = category
   if (manufacturer != false) componentDetail.manufacturer = manufacturer
-    
   var component = new Component(componentDetail);    
   component.save(function (err) {
     if (err) {
+      console.log(err);
       cb(err, null)
       return
     }
     console.log('New Component: ' + component);
-    components.push(compoennt)
+    components.push(component)
     cb(null, component)
   }  );
 }
@@ -98,6 +100,10 @@ function createCategoryManufacturers(cb) {
         function(callback) {
           let description = "Corsair designs and sells a range of products for computers, including high-speed DRAM modules, ATX power supplies (PSUs), USB flash drives (UFDs), CPU/GPU and case cooling, gaming peripherals (such as keyboards or computer mice), computer cases, solid-state drives (SSDs), and speakers.";
           manufacturerCreate('Corsair', description, callback);
+        },
+        function(callback) {
+          let description = "MSI is a world leader in gaming, content creation, business & productivity and AIoT solutions. Bolstered by its cutting-edge R&D capabilities and customer-driven innovation, MSI has a wide-ranging global presence spanning over 120 countries. Its comprehensive lineup of laptops, graphics cards, monitors, motherboards, desktops, peripherals, servers, IPCs, robotic appliances, and vehicle infotainment and telematics systems are globally acclaimed.";
+          manufacturerCreate('MSI', description, callback);
         },
         function(callback) {
           let description = "A central processing unit (CPU), also called a central processor, main processor or just processor, is the electronic circuitry that executes instructions comprising a computer program. The CPU performs basic arithmetic, logic, controlling, and input/output (I/O) operations specified by the instructions in the program.";
@@ -124,25 +130,16 @@ function createCategoryManufacturers(cb) {
 function createComponents(cb) {
     async.parallel([
         function(callback) {
-          bookCreate('The Name of the Wind (The Kingkiller Chronicle, #1)', 'I have stolen princesses back from sleeping barrow kings. I burned down the town of Trebon. I have spent the night with Felurian and left with both my sanity and my life. I was expelled from the University at a younger age than most people are allowed in. I tread paths by moonlight that others fear to speak of during day. I have talked to Gods, loved women, and written songs that make the minstrels weep.', '9781473211896', authors[0], [genres[0],], callback);
+          componentCreate("Intel Core i5-12400", "2.5GHz base, 6-Core, 65W base power, 117W max power, Intel UHD Graphics 730", 208.96, categories[0]._id, manufacturers[2]._id, callback);
         },
         function(callback) {
-          bookCreate("The Wise Man's Fear (The Kingkiller Chronicle, #2)", 'Picking up the tale of Kvothe Kingkiller once again, we follow him into exile, into political intrigue, courtship, adventure, love and magic... and further along the path that has turned Kvothe, the mightiest magician of his age, a legend in his own time, into Kote, the unassuming pub landlord.', '9788401352836', authors[0], [genres[0],], callback);
+          componentCreate("AMD Ryzen 5 5600X", '3.7 GHz base, 6-Core, 65W base power, Multithread processing (12 threads)', 265.98, categories[0]._id, manufacturers[0]._id, callback);
         },
         function(callback) {
-          bookCreate("The Slow Regard of Silent Things (Kingkiller Chronicle)", 'Deep below the University, there is a dark place. Few people know of it: a broken web of ancient passageways and abandoned rooms. A young woman lives there, tucked among the sprawling tunnels of the Underthing, snug in the heart of this forgotten place.', '9780756411336', authors[0], [genres[0],], callback);
+          componentCreate("GIGABYTE GeForce RTX 3060", '15GHz memory clock, 12 GB memory size, 360GB/s memory bandwidth, OpenGL 4.6', 699.99, categories[1]._id, manufacturers[1]._id, callback);
         },
         function(callback) {
-          bookCreate("Apes and Angels", "Humankind headed out to the stars not for conquest, nor exploration, nor even for curiosity. Humans went to the stars in a desperate crusade to save intelligent life wherever they found it. A wave of death is spreading through the Milky Way galaxy, an expanding sphere of lethal gamma ...", '9780765379528', authors[1], [genres[1],], callback);
-        },
-        function(callback) {
-          bookCreate("Death Wave","In Ben Bova's previous novel New Earth, Jordan Kell led the first human mission beyond the solar system. They discovered the ruins of an ancient alien civilization. But one alien AI survived, and it revealed to Jordan Kell that an explosion in the black hole at the heart of the Milky Way galaxy has created a wave of deadly radiation, expanding out from the core toward Earth. Unless the human race acts to save itself, all life on Earth will be wiped out...", '9780765379504', authors[1], [genres[1],], callback);
-        },
-        function(callback) {
-          bookCreate('Test Book 1', 'Summary of test book 1', 'ISBN111111', authors[4], [genres[0],genres[1]], callback);
-        },
-        function(callback) {
-          bookCreate('Test Book 2', 'Summary of test book 2', 'ISBN222222', authors[4], false, callback)
+          componentCreate("MSI MPG Z690 EDGE WIFI DDR4 LGA 1700 ATX Intel Motherboard", "Intel Z690 chipset, 6 x SATA 6Gb/s, Intel WiFi 6 802.11, Bluetooth 5.2", 474.98, categories[2]._id, manufacturers[4]._id, callback);
         }
         ],
         // optional callback
@@ -152,17 +149,16 @@ function createComponents(cb) {
 
 
 async.series([
-    createGenreAuthors,
-    createBooks,
-    createBookInstances
-],
-// Optional callback
-function(err, results) {
+    createCategoryManufacturers,
+    createComponents
+  ],
+  // Optional callback
+  function(err, results) {
     if (err) {
-        console.log('FINAL ERR: '+err);
+        console.log('FINAL ERR: ' + err);
     }
     else {
-        console.log('BOOKInstances: '+bookinstances);
+        console.log('Components: ' + results + components);
         
     }
     // All done, disconnect from database

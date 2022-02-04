@@ -12,3 +12,5 @@ const ManufacturerSchema = new Schema(
 ManufacturerSchema.virtual("url").get(function() {
     return `/catalog/manufacturer/${this._id}`;
 })
+
+module.exports = mongoose.model("Manufacturer", ManufacturerSchema);

@@ -16,3 +16,5 @@ const ComponentSchema = new Schema(
 ComponentSchema.virtual("url").get(function() {
     return `/catalog/component/${this._id}`;
 })
+
+module.exports = mongoose.model("Component", ComponentSchema);
