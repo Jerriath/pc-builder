@@ -5,8 +5,18 @@ block content
     .main-content
       header.main-header
         h1= title
-        p Welcome to #{title}
 
-  // I want to add some a for loop that will loop through each category and create a card (on a grid) for each; if there is no component saved, have an skeleton card
+      section.category-row 
+        article.category-col 
+          h2 Processors
 
+        article.category-col 
+          h2 Memory
+        
+        article.category-col 
+          h2 Peripherals
+        
+        article.category-col 
+          h2 Miscelleneous
+      
   include footer.pug
