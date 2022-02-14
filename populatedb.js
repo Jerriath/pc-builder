@@ -57,16 +57,16 @@ function manufacturerCreate(name, description, cb) {
   }   );
 }
 
-function componentCreate(name, description, price, category, manufacturer, cb) {
+function componentCreate(name, description, stock, price, category, manufacturer, cb) {
   componentDetail = { 
     name: name,
     description: description,
-    image: null,
+    stock: stock,
     price: price,
     category: category,
     manufacturer: manufacturer
   }
-  console.log(name + " " + description + " " + price + " " + category + " " + manufacturer);
+  console.log(name + " " + description + " " + stock + " " + price + " " + category + " " + manufacturer);
   if (category != false) componentDetail.category = category
   if (manufacturer != false) componentDetail.manufacturer = manufacturer
   var component = new Component(componentDetail);    
@@ -130,16 +130,16 @@ function createCategoryManufacturers(cb) {
 function createComponents(cb) {
     async.parallel([
         function(callback) {
-          componentCreate("Intel Core i5-12400", "2.5GHz base, 6-Core, 65W base power, 117W max power, Intel UHD Graphics 730", 208.96, categories[0]._id, manufacturers[2]._id, callback);
+          componentCreate("Intel Core i5-12400", "2.5GHz base, 6-Core, 65W base power, 117W max power, Intel UHD Graphics 730", 10, 208.96, categories[0]._id, manufacturers[2]._id, callback);
         },
         function(callback) {
-          componentCreate("AMD Ryzen 5 5600X", '3.7 GHz base, 6-Core, 65W base power, Multithread processing (12 threads)', 265.98, categories[0]._id, manufacturers[0]._id, callback);
+          componentCreate("AMD Ryzen 5 5600X", '3.7 GHz base, 6-Core, 65W base power, Multithread processing (12 threads)', 9, 265.98, categories[0]._id, manufacturers[0]._id, callback);
         },
         function(callback) {
-          componentCreate("GIGABYTE GeForce RTX 3060", '15GHz memory clock, 12 GB memory size, 360GB/s memory bandwidth, OpenGL 4.6', 699.99, categories[1]._id, manufacturers[1]._id, callback);
+          componentCreate("GIGABYTE GeForce RTX 3060", '15GHz memory clock, 12 GB memory size, 360GB/s memory bandwidth, OpenGL 4.6', 4, 699.99, categories[1]._id, manufacturers[1]._id, callback);
         },
         function(callback) {
-          componentCreate("MSI MPG Z690 EDGE WIFI DDR4 LGA 1700 ATX Intel Motherboard", "Intel Z690 chipset, 6 x SATA 6Gb/s, Intel WiFi 6 802.11, Bluetooth 5.2", 474.98, categories[2]._id, manufacturers[4]._id, callback);
+          componentCreate("MSI MPG Z690 EDGE WIFI DDR4 LGA 1700 ATX Intel Motherboard", "Intel Z690 chipset, 6 x SATA 6Gb/s, Intel WiFi 6 802.11, Bluetooth 5.2", 11, 474.98, categories[2]._id, manufacturers[4]._id, callback);
         }
         ],
         // optional callback

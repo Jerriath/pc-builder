@@ -6,16 +6,16 @@ block content
       header.main-header
         h1= title
 
-      section.component-list 
-        .component-row
+      section.list 
+        .row
           h2 Category 
           h2 Component 
           h2 Price 
           h2 Purchase
         each category in categories 
-          .component-row 
+          .row 
             h2
-              a.category-name(href=category.url) #{category.name}
+              a.name(href=category.url) #{category.name}
             h2 
               a.choose-category(href=category.url) + Choose a #{category.name}
             h2

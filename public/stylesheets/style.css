@@ -2,7 +2,13 @@
 
   I.   Header Styles
   II.  Catalog Styles
-  III. 
+  III. Category Styles
+    a. Category_Details
+  IV.  Component Styles
+    a. Component Details
+  V.   Manufacturer Styles
+    a. Manufacturer Details
+  VI.  General Layout Styles
 
   ---------- Table of Contents ----------*/
 
@@ -105,10 +111,28 @@ main {
   font-weight: bold;
 }
 
-.component-list {
-  display: flex;
-  flex-direction: column;
+.choose-category {
+  background-color: mistyrose;
+  padding: 0.5rem;
+  border-radius: 5px;
+  text-decoration: none;
+  color: steelblue;
+  transition: box-shadow 0.2s linear;
 }
+
+.choose-category:hover {
+  box-shadow: 3px 3px 3px 3px rgba(0, 0, 0, 0.3);
+}
+
+
+
+/* ----- Category Styles ----- */
+
+
+
+
+
+/* ----- Component Styles ----- */
 
 .component-row {
   display: flex;
@@ -126,11 +150,11 @@ main {
 }
 
 .component-row h2:nth-child(1) {
-  width: 15%;
+  width: 50%;
 }
 
 .component-row h2:nth-child(2) {
-  width: 50%;
+  width: 20%;
 }
 
 .component-row h2:nth-child(3) {
@@ -138,10 +162,64 @@ main {
 }
 
 .component-row h2:nth-child(4) {
+  width: 15%;
+}
+
+.add-button {
+  background-color: mistyrose;
+  border-radius: 5px;
+  padding: 0.25rem;
+  color: lightslategray;
+  font-size: 1rem;
+  border: 0;
+  transition: box-shadow 0.2s linear;
+}
+
+.add-button:hover {
+  box-shadow: 3px 3px 3px 3px rgba(0, 0, 0, 0.3);
+}
+
+
+
+/* ----- General Layout Styles ----- */
+
+.list {
+  display: flex;
+  flex-direction: column;
+}
+
+.row {
+  display: flex;
+  justify-content: flex-start;
+  border-bottom: 1px solid mistyrose;
+  padding: 0.5rem 2rem;
+  height: 3rem;
+  align-items: center;
+}
+
+.row h2 {
+  font-size: 1.25rem;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  color: mistyrose;
+}
+
+.row h2:nth-child(1) {
+  width: 15%;
+}
+
+.row h2:nth-child(2) {
+  width: 50%;
+}
+
+.row h2:nth-child(3) {
+  width: 15%;
+}
+
+.row h2:nth-child(4) {
   width: 10%;
 }
 
-.category-name {
+.name {
   font-size: 1.25rem;
   font-family: Verdana, Geneva, Tahoma, sans-serif;
   color: mistyrose;
@@ -152,19 +230,13 @@ main {
   border-radius: 5px;
 }
 
-.category-name:hover {
+.name:hover {
   background-color: rgba(0, 0, 0, 0.3);
 }
 
-.choose-category {
-  background-color: mistyrose;
-  padding: 0.5rem;
-  border-radius: 5px;
-  text-decoration: none;
-  color: steelblue;
-  transition: box-shadow 0.2s linear;
-}
-
-.choose-category:hover {
-  box-shadow: 3px 3px 3px 3px rgba(0, 0, 0, 0.3);
+.description {
+  margin: 1rem 0;
+  color: mistyrose;
+  font-size: 1.25rem;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
 }

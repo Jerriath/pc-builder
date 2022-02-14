@@ -38,7 +38,6 @@ exports.category_detail = function(req, res, next) {
                 return next(err);
             }
             res.render("category_detail", {
-                title: results.category.title,
                 category: results.category,
                 components: results.components
             })

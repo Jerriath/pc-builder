@@ -2,10 +2,25 @@ extends layout
 
 block content
     main
-        h1= title 
-        h2= category.name 
-        each component in components 
-            li= component.name
+        .main-content
+            header.main-header
+                h1= "Choose a " + category.name
+                p.description= category.description
+            section.list 
+                .component-row
+                    h2 Name 
+                    h2 Manufacturer 
+                    h2 Stock 
+                    h2 Price
+                each component in components 
+                    .component-row 
+                        h2
+                            a.name(href=component.url) #{component.name}
+                        h2
+                            a.name(href=component.manufacturer.url) #{component.manufacturer.name}
+                        h2 #{component.stock}
+                        h2 $#{component.price}
+                        button.add-button(data-categoryid=component.category._id data-partid=component._id) Add
         
       
     include footer.pug
