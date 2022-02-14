@@ -1,0 +1,11 @@
+extends layout
+
+block content
+    main
+        h1= title 
+        h2= category.name 
+        each component in components 
+            li= component.name
+        
+      
+    include footer.pug
