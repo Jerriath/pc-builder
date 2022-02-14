@@ -74,13 +74,13 @@ header.site-header {
 main {
   width: 100%;
   min-height: 100vh;
-  background-color:rgba(61, 61, 61, 0.1);
+  background-color:rgba(61, 61, 61, 0.5);
   margin-top: 5rem;
 }
 
 .main-content {
-  min-width: 1200px;
-  max-width: 85%;
+  min-width: 700px;
+  max-width: 70%;
   margin: auto;
   padding: 2rem 0;
 }
@@ -105,29 +105,66 @@ main {
   font-weight: bold;
 }
 
-.category-row {
-  display: flex;
-  width: 100%;
-  justify-content: space-between;
-
-}
-
-.category-col {
-  width: 20%;
+.component-list {
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
-  align-items: center;
-  background-color: darkgrey;
-  border-radius: 40px;
-  padding: 1rem;
 }
 
-.category-col h2 {
-  font-family: Verdana, Geneva, Tahoma, sans-serif;
-  font-size: 2rem;
-  padding: 0 2rem;
-  padding-bottom: 0.5rem;
-  color: mistyrose;
+.component-row {
+  display: flex;
+  justify-content: flex-start;
   border-bottom: 1px solid mistyrose;
+  padding: 0.5rem 2rem;
+  height: 3rem;
+  align-items: center;
+}
+
+.component-row h2 {
+  font-size: 1.25rem;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  color: mistyrose;
+}
+
+.component-row h2:nth-child(1) {
+  width: 15%;
+}
+
+.component-row h2:nth-child(2) {
+  width: 50%;
+}
+
+.component-row h2:nth-child(3) {
+  width: 15%;
+}
+
+.component-row h2:nth-child(4) {
+  width: 10%;
+}
+
+.category-name {
+  font-size: 1.25rem;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  color: mistyrose;
+  text-decoration: none;
+  padding: 0 0.5rem;
+  background-color: rgba(0, 0, 0, 0);
+  transition: background-color 0.2s linear;
+  border-radius: 5px;
+}
+
+.category-name:hover {
+  background-color: rgba(0, 0, 0, 0.3);
+}
+
+.choose-category {
+  background-color: mistyrose;
+  padding: 0.5rem;
+  border-radius: 5px;
+  text-decoration: none;
+  color: steelblue;
+  transition: box-shadow 0.2s linear;
+}
+
+.choose-category:hover {
+  box-shadow: 3px 3px 3px 3px rgba(0, 0, 0, 0.3);
 }
