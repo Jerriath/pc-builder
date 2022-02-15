@@ -5,6 +5,7 @@ const Manufacturer = require("../models/manufacturer");
 
 // Importing necessary modules
 const async = require("async");
+const mongoose = require("mongoose");
 const { body, validationResults } = require("express-validator");
 
 function getStoredParts(req, next) {
@@ -16,12 +17,12 @@ function getStoredParts(req, next) {
       ) {
         promises.push(
           new Promise(function (resolve, reject) {
-            ComputerPart.findById(req.cookies[categoryID]).exec(function (
+            Component.findById(req.cookies[categoryID]).exec(function (
               err,
-              part
+              component
             ) {
               if (err) return next(err);
-              resolve([categoryID, part]);
+              resolve([categoryID, component]);
             });
           })
         );
@@ -32,18 +33,20 @@ function getStoredParts(req, next) {
 
 exports.index = function(req, res, next) {
 
-    Category.find({}).exec(function (err, categories) {
+    Category.find({}).exec(async function (err, categories) {
         if (err) return next(err);
         const userList = {};
-        Promise.all(getStoredParts(req, next)).then(function (parts) {
-            parts.forEach((part) => {
-            userList[part[0]] = part[1];
+        await Promise.all(getStoredParts(req, next)).then(function (components) {
+            components.forEach((component) => {
+            userList[component[0]] = component[1];
             });
         });
+        console.log("test");
+        console.log(userList);
         res.render("index", {
             title: "Components Catalog",
             userList: userList,
-            categories: categories,
+            categories: categories
         });
     })
 

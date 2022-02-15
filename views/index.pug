@@ -5,6 +5,7 @@ block content
     .main-content
       header.main-header
         h1= title
+        h1= cookies
 
       section.list 
         .row
@@ -13,13 +14,28 @@ block content
           h2 Price 
           h2 Purchase
         each category in categories 
-          .row 
-            h2
-              a.name(href=category.url) #{category.name}
-            h2 
-              a.choose-category(href=category.url) + Choose a #{category.name}
-            h2
-            h2 
+          - let key = category._id 
+          - let part = null 
+          if (userList[key]) 
+            - part = userList[key]
+          if (part) 
+            .row 
+              h2 
+                a.name(href=category.url) #{category.name}
+              h2 
+                a.name(href=part.url) #{part.name} 
+              h2= part.stock  
+              h2= part.price
+          else 
+            .row 
+              h2
+                a.name(href=category.url) #{category.name}
+              h2 
+                a.choose-category(href=category.url) + Choose a #{category.name}
+              h2
+              h2 
+          
+          
         
       
   include footer.pug
