@@ -17,7 +17,7 @@ function getStoredParts(req, next) {
       ) {
         promises.push(
           new Promise(function (resolve, reject) {
-            Component.findById(req.cookies[categoryID]).exec(function (
+            Component.findById(req.cookies[categoryID]).populate("category").exec(function (
               err,
               component
             ) {
@@ -41,8 +41,7 @@ exports.index = function(req, res, next) {
             userList[component[0]] = component[1];
             });
         });
-        console.log("test");
-        console.log(userList);
+        
         res.render("index", {
             title: "Components Catalog",
             userList: userList,

@@ -20,7 +20,7 @@ block content
                             a.name(href=component.manufacturer.url) #{component.manufacturer.name}
                         h2 #{component.stock}
                         h2 $#{component.price}
-                        button.add-button(data-categoryid=component.category._id data-partid=component._id) Add
+                        button.button.add-button(data-categoryid=component.category._id data-partid=component._id) Add
         
       
     include footer.pug

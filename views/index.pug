@@ -13,19 +13,21 @@ block content
           h2 Component 
           h2 Price 
           h2 Purchase
+          h2 Remove
         each category in categories 
           - let key = category._id 
-          - let part = null 
+          - let component = null 
           if (userList[key]) 
-            - part = userList[key]
-          if (part) 
+            - component = userList[key]
+          if (component) 
             .row 
               h2 
-                a.name(href=category.url) #{category.name}
+                a.name.highlight(href=category.url) #{category.name}
               h2 
-                a.name(href=part.url) #{part.name} 
-              h2= part.stock  
-              h2= part.price
+                a.name.highlight(href=component.url) #{component.name} 
+              h2= component.stock  
+              h2= component.price
+              button.button.remove-button(data-removekey=component.category._id) Remove
           else 
             .row 
               h2
@@ -39,3 +41,5 @@ block content
         
       
   include footer.pug
+
+  script(src="/javascripts/removeButton.js")

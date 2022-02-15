@@ -7,12 +7,21 @@ html
     link(rel="stylesheet", href="/stylesheets/cssreset.css")
     link(rel='stylesheet', href='/stylesheets/style.css')
     link(rel="icon", type="image/favicon", href="/images/favicon.ico")
-  body
+  body.expand
     header.site-header
       .header-content 
         h1
           a(href="/catalog")
             span PC - Builder
-        button.dropdown 
-
+        button#nav-button
+        nav#nav-menu
+          ul 
+            li 
+              a(href="/catalog/manufacturers") Manufacturers
+            li 
+              a(href="/catalog/categories") Categories
+            li 
+              a(href="/catalog/components") All Components
     block content
+  script(src="/javascripts/navMenu.js")
+    

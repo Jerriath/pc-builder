@@ -32,9 +32,10 @@ header.site-header {
   margin: 0 auto;
   align-items: center;
   height: 100%;
+  position: relative;
 }
 
-.dropdown {
+#nav-button {
   background: url("../images//svgs/menu.svg");
   background-repeat: no-repeat;
   width: 30px;
@@ -46,8 +47,34 @@ header.site-header {
   cursor: pointer;
 }
 
-.dropdown:hover {
+#nav-button:hover {
   background-color: rgba(61, 61, 61, 0.2);
+}
+
+#nav-menu {
+  position: absolute;
+  padding: 1rem 2rem;
+  background-color: slategray;
+  right: 0;
+  top: -10rem;
+  transition: top 0.4s linear;
+  border-radius: 15px;
+}
+
+.expand {
+  top: 5rem !important;
+}
+
+#nav-menu li {
+  padding: 0.5rem 0;
+  border-bottom: 1px solid mistyrose;
+}
+
+#nav-menu li a {
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-size: 1.5rem;
+  color: mistyrose;
+  padding: 0;
 }
 
 .header-content a {
@@ -165,7 +192,7 @@ main {
   width: 15%;
 }
 
-.add-button {
+.button {
   background-color: mistyrose;
   border-radius: 5px;
   padding: 0.25rem;
@@ -175,7 +202,7 @@ main {
   transition: box-shadow 0.2s linear;
 }
 
-.add-button:hover {
+.button:hover {
   box-shadow: 3px 3px 3px 3px rgba(0, 0, 0, 0.3);
 }
 
@@ -232,6 +259,10 @@ main {
 
 .name:hover {
   background-color: rgba(0, 0, 0, 0.3);
+}
+
+.highlight {
+  font-weight: bold;
 }
 
 .description {
