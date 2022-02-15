@@ -6,7 +6,7 @@ block content
       header.main-header
         h1= title
         h1= cookies
-
+      - totalPrice = 0
       section.list 
         .row
           h2 Category 
@@ -19,12 +19,16 @@ block content
           - let component = null 
           if (userList[key]) 
             - component = userList[key]
+            - totalPrice += component.price
           if (component) 
             .row 
               h2 
                 a.name.highlight(href=category.url) #{category.name}
               h2 
-                a.name.highlight(href=component.url) #{component.name} 
+                if (component.name.length > 36) 
+                  a.name.highlight(href=component.url) #{component.name.slice(0, 36) + "..."} 
+                else 
+                  a.name.highlight(href=component.url) #{component.name}
               h2= component.stock  
               h2= component.price
               button.button.remove-button(data-removekey=component.category._id) Remove
@@ -36,7 +40,9 @@ block content
                 a.choose-category(href=category.url) + Choose a #{category.name}
               h2
               h2 
-          
+        .total-row 
+          h2 Total Price: $
+            span= totalPrice  
           
         
       
