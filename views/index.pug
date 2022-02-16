@@ -7,8 +7,8 @@ block content
         h1= title
         h1= cookies
       - totalPrice = 0
-      section.list 
-        .row
+      section.catalog-list 
+        .catalog-row
           h2 Category 
           h2 Component 
           h2 Price 
@@ -21,7 +21,7 @@ block content
             - component = userList[key]
             - totalPrice += component.price
           if (component) 
-            .row 
+            .catalog-row 
               h2 
                 a.name.highlight(href=category.url) #{category.name}
               h2 
@@ -33,7 +33,7 @@ block content
               h2= component.price
               button.button.remove-button(data-removekey=component.category._id) Remove
           else 
-            .row 
+            .catalog-row 
               h2
                 a.name(href=category.url) #{category.name}
               h2 

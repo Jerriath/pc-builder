@@ -6,7 +6,7 @@ block content
             header.main-header
                 h1= manufacturer.name
                 p.description= manufacturer.description
-            section.list 
+            section.catalog-list 
                 .component-row
                     h2 Name 
                     h2 Category 
@@ -16,7 +16,10 @@ block content
                 each component in components 
                     .component-row 
                         h2
-                            a.name(href=component.url) #{component.name}
+                            if (component.name.length > 36) 
+                                a.name.highlight(href=component.url) #{component.name.slice(0, 36) + "..."} 
+                            else 
+                                a.name.highlight(href=component.url) #{component.name}
                         h2
                             a.name(href=component.category.url) #{component.category.name}
                         h2 #{component.stock}

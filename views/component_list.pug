@@ -4,24 +4,27 @@ block content
     main
         .main-content
             header.main-header
-                h1= "Choose a " + category.name
-                p.description= category.description
+                h1= title
+                br
+                a(href="/catalog/component/create")
+                    h2.item + Add a Component
             section.catalog-list 
-                .component-row
+                .catalog-row
+                    h2 Category
                     h2 Name 
                     h2 Manufacturer 
-                    h2 Stock 
                     h2 Price
                 each component in components 
-                    .component-row 
+                    .catalog-row 
+                        h2 
+                            a.name.highlight(href=component.category.url) #{component.category.name}
                         h2
                             if (component.name.length > 36) 
                                 a.name.highlight(href=component.url) #{component.name.slice(0, 36) + "..."} 
                             else 
                                 a.name.highlight(href=component.url) #{component.name}
                         h2
-                            a.name(href=component.manufacturer.url) #{component.manufacturer.name}
-                        h2 #{component.stock}
+                            a.name.highlight(href=component.manufacturer.url) #{component.manufacturer.name}
                         h2 $#{component.price}
                         button.button.add-button(data-categoryid=component.category._id data-partid=component._id) Add
         

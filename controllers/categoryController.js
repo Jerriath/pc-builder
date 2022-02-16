@@ -9,7 +9,15 @@ const async = require("async");
 const { body, validationResults } = require("express-validator");
 
 exports.category_list = function(req, res) {
-    res.send("NOT IMPLEMENTED YET");
+    
+    Category.find({}).exec(function (err, categories) {
+        if (err) return next(err);
+        res.render("category_list", {
+            title: "Category List",
+            categories: categories
+        });
+    })
+
 }
 
 exports.category_detail = function(req, res, next) {

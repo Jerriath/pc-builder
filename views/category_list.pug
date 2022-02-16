@@ -6,11 +6,11 @@ block content
             header.main-header
                 h1= title
             section.list 
-                a(href="/catalog/manufacturer/create")
+                a(href="/catalog/category/create")
                     h2.item + Add a Manufacturer
-                each manufacturer in manufacturers 
-                    a(href=manufacturer.url)
-                        h2.item= manufacturer.name
+                each category in categories 
+                    a(href=category.url)
+                        h2.item= category.name
         
       
     include footer.pug

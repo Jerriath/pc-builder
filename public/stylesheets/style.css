@@ -151,6 +151,59 @@ main {
   box-shadow: 3px 3px 3px 3px rgba(0, 0, 0, 0.3);
 }
 
+.catalog-list {
+  display: flex;
+  flex-direction: column;
+}
+
+.catalog-row {
+  display: flex;
+  justify-content: flex-start;
+  border-bottom: 1px solid mistyrose;
+  padding: 0.5rem 2rem;
+  height: 3rem;
+  align-items: center;
+}
+
+.catalog-row h2 {
+  font-size: 1.25rem;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  color: mistyrose;
+}
+
+.catalog-row h2:nth-child(1) {
+  width: 15%;
+}
+
+.catalog-row h2:nth-child(2) {
+  width: 50%;
+}
+
+.catalog-row h2:nth-child(3) {
+  width: 15%;
+}
+
+.catalog-row h2:nth-child(4) {
+  width: 10%;
+}
+
+.total-row {
+  display: flex;
+  justify-content: flex-end;
+  padding: 0.5rem 2rem;
+  height: 3rem;
+  align-items: space-between;
+}
+
+.total-row h2 {
+  color: mistyrose;
+  font-size: 1.25rem;
+  padding: 1rem 0;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-weight: bold;
+  text-decoration: underline;
+}
+
 
 
 /* ----- Category Styles ----- */
@@ -210,18 +263,24 @@ main {
 
 /* ----- Manufacturer Styles ----- */
 
-.manufacturer-list {
+
+
+
+
+/* ----- General Layout Styles ----- */
+
+.list {
   display: flex;
   flex-direction: column;
   width: 50%;
   margin: 0 auto;
 }
 
-.manufacturer-list a {
+.list a {
   text-decoration: none;
 }
 
-.manufacturer-item {
+.item {
   font-size: 1.75rem;
   padding: 0.5rem;
   width: 100%;
@@ -231,65 +290,8 @@ main {
   font-weight: bold;
 }
 
-.manufacturer-item:hover {
+.item:hover {
   background-color: rgba(0, 0, 0, 0.2);
-}
-
-
-
-/* ----- General Layout Styles ----- */
-
-.list {
-  display: flex;
-  flex-direction: column;
-}
-
-.row {
-  display: flex;
-  justify-content: flex-start;
-  border-bottom: 1px solid mistyrose;
-  padding: 0.5rem 2rem;
-  height: 3rem;
-  align-items: center;
-}
-
-.row h2 {
-  font-size: 1.25rem;
-  font-family: Verdana, Geneva, Tahoma, sans-serif;
-  color: mistyrose;
-}
-
-.row h2:nth-child(1) {
-  width: 15%;
-}
-
-.row h2:nth-child(2) {
-  width: 50%;
-}
-
-.row h2:nth-child(3) {
-  width: 15%;
-}
-
-.row h2:nth-child(4) {
-  width: 10%;
-}
-
-.total-row {
-  display: flex;
-  justify-content: flex-end;
-  padding: 0.5rem 2rem;
-  height: 3rem;
-  align-items: space-between;
-}
-
-.total-row h2 {
-  color: mistyrose;
-  font-size: 1.25rem;
-  padding: 1rem 0;
-  font-family: Verdana, Geneva, Tahoma, sans-serif;
-  font-weight: bold;
-  text-decoration: underline;
 }
 
 .name {

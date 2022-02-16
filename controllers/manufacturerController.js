@@ -10,7 +10,7 @@ const { body, validationResults } = require("express-validator");
 
 exports.manufacturer_list = function(req, res) {
 
-    Manufacturer.find({}).exec(async function (err, manufacturers) {
+    Manufacturer.find({}).exec(function (err, manufacturers) {
         if (err) return next(err);
         res.render("manufacturer_list", {
             title: "Manufacturer List",

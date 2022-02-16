@@ -52,7 +52,18 @@ exports.index = function(req, res, next) {
 }
 
 exports.component_list = function(req, res) {
-    res.send("NOT IMPLEMENTED YET");
+    
+  Component.find({})
+  .populate("manufacturer")
+  .populate("category")
+  .exec(function (err, components) {
+    if (err) return next(err);
+    res.render("component_list", {
+        title: "Component List",
+        components: components
+    });
+  })
+
 }
 
 exports.component_detail = function(req, res) {
