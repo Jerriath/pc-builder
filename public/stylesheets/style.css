@@ -185,11 +185,11 @@ main {
 }
 
 .component-row h2:nth-child(3) {
-  width: 15%;
+  width: 10%;
 }
 
 .component-row h2:nth-child(4) {
-  width: 15%;
+  width: 10%;
 }
 
 .button {
@@ -204,6 +204,35 @@ main {
 
 .button:hover {
   box-shadow: 3px 3px 3px 3px rgba(0, 0, 0, 0.3);
+}
+
+
+
+/* ----- Manufacturer Styles ----- */
+
+.manufacturer-list {
+  display: flex;
+  flex-direction: column;
+  width: 50%;
+  margin: 0 auto;
+}
+
+.manufacturer-list a {
+  text-decoration: none;
+}
+
+.manufacturer-item {
+  font-size: 1.75rem;
+  padding: 0.5rem;
+  width: 100%;
+  color: mistyrose;
+  text-decoration: none;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-weight: bold;
+}
+
+.manufacturer-item:hover {
+  background-color: rgba(0, 0, 0, 0.2);
 }
 
 

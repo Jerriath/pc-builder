@@ -1,0 +1,16 @@
+extends layout
+
+block content
+    main
+        .main-content
+            header.main-header
+                h1= title
+            section.manufacturer-list 
+                a(href="/catalog/manufacturer/create")
+                    h2.manufacturer-item + Add a Manufacturer
+                each manufacturer in manufacturers 
+                    a(href=manufacturer.url)
+                        h2.manufacturer-item= manufacturer.name
+        
+      
+    include footer.pug

@@ -4,21 +4,21 @@ block content
     main
         .main-content
             header.main-header
-                h1= "Choose a " + category.name
-                p.description= category.description
+                h1= manufacturer.name
+                p.description= manufacturer.description
             section.list 
                 .component-row
                     h2 Name 
-                    h2 Manufacturer 
+                    h2 Category 
                     h2 Stock 
                     h2 Price
-                    h2 
+                    h2
                 each component in components 
                     .component-row 
                         h2
                             a.name(href=component.url) #{component.name}
                         h2
-                            a.name(href=component.manufacturer.url) #{component.manufacturer.name}
+                            a.name(href=component.category.url) #{component.category.name}
                         h2 #{component.stock}
                         h2 $#{component.price}
                         button.button.add-button(data-categoryid=component.category._id data-partid=component._id) Add
