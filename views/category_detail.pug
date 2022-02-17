@@ -20,7 +20,7 @@ block content
                             else 
                                 a.name.highlight(href=component.url) #{component.name}
                         h2
-                            a.name(href=component.manufacturer.url) #{component.manufacturer.name}
+                            a.name.highlight(href=component.manufacturer.url) #{component.manufacturer.name}
                         h2 #{component.stock}
                         h2 $#{component.price}
                         button.button.add-button(data-categoryid=component.category._id data-partid=component._id) Add

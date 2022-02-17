@@ -1,0 +1,39 @@
+extends layout
+
+block content
+    main
+        .main-content
+            header.main-header
+                h1= title
+                .component-routes 
+                    h2
+                        a.name(href=component.url + "/update") Update 
+                    h2
+                        a.name(href=component.url + "/delete") Delete
+                button.button.add-button(data-categoryid=component.category._id data-partid=component._id) Add
+            section.component-details
+                .main-details 
+                    .detail-item 
+                        h2.subtitle Manufacturer: 
+                        h2
+                            a.name.highlight(href=component.manufacturer.url)= component.manufacturer.name
+                    .detail-item 
+                        h2.subtitle Category: 
+                        h2
+                            a.name.highlight(href=component.category.url)= component.category.name
+                    .detail-item 
+                        h2.subtitle Price: 
+                        h2.name= component.price
+                    .detail-item 
+                        h2.subtitle Stock: 
+                        h2.name= component.stock
+                .specifications 
+                    .detail-item
+                        h2.subtitle Full Specifications
+                        each detail in details
+                            h3.spec-detail= detail
+        
+      
+    include footer.pug
+
+    script(src="/javascripts/addButton.js")

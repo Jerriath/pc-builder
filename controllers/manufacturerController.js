@@ -6,7 +6,7 @@ const Manufacturer = require("../models/manufacturer");
 // Importing necessary modules
 const async = require("async");
 const mongoose = require("mongoose");
-const { body, validationResults } = require("express-validator");
+const { body, validationResult } = require("express-validator");
 
 exports.manufacturer_list = function(req, res) {
 
@@ -32,7 +32,7 @@ exports.manufacturer_detail = function(req, res) {
                 Manufacturer.findById(req.params.id).exec(callback);
             },
             components: function (callback) {
-                Component.find({ manurfacturer: req.params.id})
+                Component.find({ manufacturer: req.params.id})
                     .populate("category")
                     .exec(callback);
             }
@@ -53,12 +53,39 @@ exports.manufacturer_detail = function(req, res) {
 }
 
 exports.manufacturer_create_get = function(req, res) {
-    res.send("NOT IMPLEMENTED YET");
+    res.render("manufacturer_form", { title: "Add a manufacturer", isUpdating: false });
 }
 
-exports.manufacturer_create_post = function(req, res) {
-    res,send("NOT IMPLETMENTED YET");
-}
+exports.manufacturer_create_post = [
+    body("name")
+        .trim()
+        .isLength({min: 1})
+        .escape()
+        .withMessage("Must provide a manufacturer name"),
+    body("description").optional({checkfalsy: true}),
+    (req, res, next) => {
+       const errors = validationResult(req);
+       if (!errors.isEmpty()) {
+           res.render("manufacturer_form", {
+               title: "Add a manufacturer",
+               manufacturer: req.body,
+               isUpdating: false,
+               errors: errors.array()
+           })
+           return;
+       } 
+       else {
+           let manufacturer = new Manufacturer({
+               name: req.body.name,
+               description: req.body.description
+           });
+           manufacturer.save(function (err) {
+               if (err) {return next(err)}
+               res.redirect(manufacturer.url);
+           })
+       }
+    }
+]
 
 exports.manufacturer_delete_get = function(req, res) {
     res.send("NOT IMPLEMENTED YET");

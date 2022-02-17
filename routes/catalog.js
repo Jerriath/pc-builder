@@ -25,7 +25,7 @@ router.get("/component/create", component_controller.component_create_get);
 router.post("/component/create", component_controller.component_create_post);
 
 // GET request to delete Component
-router.post("/component/:id/delete", component_controller.component_delete_get);
+router.get("/component/:id/delete", component_controller.component_delete_get);
 
 // POST request to delete Component
 router.post("/component/:id/delete", component_controller.component_delete_post);

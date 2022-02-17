@@ -6,7 +6,7 @@ const Manufacturer = require("../models/manufacturer");
 // Importing necessary modules
 const async = require("async");
 const mongoose = require("mongoose");
-const { body, validationResults } = require("express-validator");
+const { body, validationResult } = require("express-validator");
 
 function getStoredParts(req, next) {
     let promises = [];
@@ -66,8 +66,32 @@ exports.component_list = function(req, res) {
 
 }
 
-exports.component_detail = function(req, res) {
-    res.send("NOT IMPLEMENTED YET");
+exports.component_detail = function(req, res, next) {
+    
+  if (!mongoose.Types.ObjectId.isValid(req.params.id)) {
+    let err = new Error("Invalid ObjectID");
+    err.status = 404;
+    return next(err);
+  }
+
+  Component.findById(req.params.id)
+    .populate("manufacturer")
+    .populate("category")
+    .exec(function (err, component) {
+      if (err) { return next(err) }
+      if (component == null) {
+        let err = new Error("Category not found");
+        err.status = 404;
+        return next(err);
+      }
+      let details = component.description.split(",");
+      res.render("component_detail", {
+        title: component.name + " Details",
+        component: component,
+        details: details
+      })
+    })
+
 }
 
 exports.component_create_get = function(req, res) {

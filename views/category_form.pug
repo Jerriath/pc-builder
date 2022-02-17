@@ -1,0 +1,18 @@
+extends layout
+
+block content
+    main
+        .main-content
+            header.main-header
+                h1= title 
+            section
+                form.basic-form(action="" method="POST")
+                    fieldset
+                        legend Name:
+                        input(type="text" required name="name" id="name" value=(category == undefined ? "" : category.name)) 
+                    fieldset 
+                        legend Description:
+                        textarea(name="description" id="description" cols="30" rows="10")
+                    button.form-btn.submit(type="submit") Submit 
+                    a(href=(category == undefined ? "/categories" : category.url))
+                        button.form-btn.cancel Cancel

@@ -28,14 +28,16 @@ block content
                 if (component.name.length > 36) 
                   a.name.highlight(href=component.url) #{component.name.slice(0, 36) + "..."} 
                 else 
-                  a.name.highlight(href=component.url) #{component.name}
-              h2= component.stock  
+                  a.name.highlight(href=component.url) #{component.name} 
               h2= component.price
+              h2
+                a(href="https://www.amazon.com/s?k=" + component.name target="_blank")
+                  button.button Amazon
               button.button.remove-button(data-removekey=component.category._id) Remove
           else 
             .catalog-row 
               h2
-                a.name(href=category.url) #{category.name}
+                a.name.highlight(href=category.url) #{category.name}
               h2 
                 a.choose-category(href=category.url) + Choose a #{category.name}
               h2
