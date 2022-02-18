@@ -16,4 +16,7 @@ block content
                     button.form-btn.submit(type="submit") Submit 
                     a(href=(category == undefined ? "/categories" : category.url))
                         button.form-btn.cancel Cancel
+        if (!errors == undefined) 
+            each err in errors 
+                li= err.msg
     include footer.pug

@@ -16,4 +16,7 @@ block content
                     button.form-btn.submit(type="submit") Submit 
                     a(href=(manufacturer == undefined ? "/manufacturers" : manufacturer.url))
                         button.form-btn.cancel Cancel
+        if (!errors == undefined) 
+            each err in errors 
+                li= err.msg
     include footer.pug

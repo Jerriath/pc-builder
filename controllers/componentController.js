@@ -7,6 +7,7 @@ const Manufacturer = require("../models/manufacturer");
 const async = require("async");
 const mongoose = require("mongoose");
 const { body, validationResult } = require("express-validator");
+const component = require("../models/component");
 
 function getStoredParts(req, next) {
     let promises = [];
@@ -119,9 +120,69 @@ exports.component_create_get = function(req, res, next) {
 
 }
 
-exports.component_create_post = function(req, res) {
-    res,send("NOT IMPLETMENTED YET");
-}
+exports.component_create_post = [
+  body("name")
+      .trim()
+      .isLength({min: 1})
+      .escape()
+      .withMessage("Must provide a Component name"),
+  body("description").optional({checkfalsy: true}),
+  body("stock", "Stock must be more than 0 (zero)")
+      .isInt({min: 0, max: 99999})
+      .escape(),
+  body("price", "Price must be between $0 and $999999")
+      .isFloat({min: 0, max: 999999})
+      .escape(),
+  body("category", "Please select a category")
+      .trim()
+      .escape(),
+  body("manufacturer", "Please select a manufacturer")
+      .trim()
+      .escape(),
+  (req, res, next) => {
+    const errors = validationResult(req);
+    let component = new Component({
+      name: req.body.name,
+      description: req.body.description,
+      stock: req.body.stock,
+      price: req.body.price,
+      category: req.body.category,
+      manufacturer: req.body.manufacturer
+    });
+    if (!errors.isEmpty()) {
+      async.parallel(
+        {
+          categories: function(callback) {
+            Category.find({}).exec(callback);
+          },
+          manufacturers: function(callback) {
+            Manufacturer.find({}).exec(callback);
+          }
+        },
+        function (err, results) {
+          if (err) { return next(err); }
+
+          res.render("component_form", {
+            title: "Add a component",
+            categories: results.categories,
+            manufacturers: results.manufacturers,
+            component: component,
+            isUpdating: false,
+            errors: errors.array()
+          })
+        }
+      )
+      return;
+    }
+    else {
+      component.save(function (err) {
+        if (err) { return next(err); }
+
+        res.redirect(component.url);
+      })
+    }
+  }
+]
 
 exports.component_delete_get = function(req, res) {
     res.send("NOT IMPLEMENTED YET");

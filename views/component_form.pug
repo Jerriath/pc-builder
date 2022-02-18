@@ -18,19 +18,19 @@ block content
                         input(type="number" required name="stock" id="stock" value=(component == undefined ? null : component.stock))
                     fieldset 
                         legend Price 
-                        input(type="number" required name="price" id="price" value=(component == undefined ? null : component.price))
+                        input(type="number" step="0.01" required name="price" id="price" value=(component == undefined ? null : component.price))
                     fieldset 
                         legend Category
                         select#category(name="category") 
                             option(value="none" selected=(component == undefined ? true : false) disabled hidden) Select an Option
                             each category in categories
-                                option(value=category.name selected=(component == undefined ? false : (component.manufacturer.name == manufacturer.name ? true : false)))= category.name
+                                option(value=category._id selected=(component == undefined ? false : (component.manufacturer.name == manufacturer.name ? true : false)))= category.name
                     fieldset 
                         legend Manufacturer
                         select#manufacturer(name="manufacturer") 
                             option(value="none" selected=(component == undefined ? true : false) disabled hidden) Select an Option
                             each manufacturer in manufacturers
-                                option(value=manufacturer.name selected=(component == undefined ? false : (component.manufacturer.name == manufacturer.name ? true : false)))= manufacturer.name
+                                option(value=manufacturer._id selected=(component == undefined ? false : (component.manufacturer.name == manufacturer.name ? true : false)))= manufacturer.name
                     button.form-btn.submit(type="submit") Submit 
                     a(href=(component == undefined ? "/categories" : component.url))
                         button.form-btn.cancel Cancel
