@@ -6,6 +6,11 @@ block content
             header.main-header
                 h1= manufacturer.name
                 p.description= manufacturer.description
+                .detail-routes 
+                    h2
+                        a.subtitle.name.highlight(href=manufacturer.url + "/update") Update 
+                    h2
+                        a.subtitle.name.highlight(href=manufacturer.url + "/delete") Delete
             section.catalog-list 
                 .component-row
                     h2 Name 

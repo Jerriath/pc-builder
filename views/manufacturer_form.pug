@@ -12,7 +12,8 @@ block content
                         input(type="text" required name="name" id="name" value=(manufacturer == undefined ? "" : manufacturer.name)) 
                     fieldset 
                         legend Description:
-                        textarea(name="description" id="description" cols="30" rows="10")
+                        textarea(name="description" id="description" cols="30" rows="10" value=( manufacturer == undefined ? "" : manufacturer.description))
                     button.form-btn.submit(type="submit") Submit 
                     a(href=(manufacturer == undefined ? "/manufacturers" : manufacturer.url))
                         button.form-btn.cancel Cancel
+    include footer.pug

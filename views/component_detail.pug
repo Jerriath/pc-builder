@@ -5,11 +5,11 @@ block content
         .main-content
             header.main-header
                 h1= title
-                .component-routes 
+                .detail-routes 
                     h2
-                        a.name(href=component.url + "/update") Update 
+                        a.subtitle.name.highlight(href=component.url + "/update") Update 
                     h2
-                        a.name(href=component.url + "/delete") Delete
+                        a.subtitle.name.highlight(href=component.url + "/delete") Delete
                 button.button.add-button(data-categoryid=component.category._id data-partid=component._id) Add
             section.component-details
                 .main-details 

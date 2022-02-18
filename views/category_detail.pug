@@ -6,6 +6,11 @@ block content
             header.main-header
                 h1= "Choose a " + category.name
                 p.description= category.description
+                .detail-routes 
+                    h2
+                        a.subtitle.name.highlight(href=category.url + "/update") Update 
+                    h2
+                        a.subtitle.name.highlight(href=category.url + "/delete") Delete
             section.catalog-list 
                 .component-row
                     h2 Name 

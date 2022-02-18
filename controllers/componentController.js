@@ -94,8 +94,29 @@ exports.component_detail = function(req, res, next) {
 
 }
 
-exports.component_create_get = function(req, res) {
-    res.send("NOT IMPLEMENTED YET");
+exports.component_create_get = function(req, res, next) {
+    
+  async.parallel(
+    {
+      categories: function(callback) {
+        Category.find({}).exec(callback);
+      },
+      manufacturers: function(callback) {
+        Manufacturer.find({}).exec(callback);
+      }
+    },
+    function(err, results) {
+      if (err) { return next(err); }
+
+      res.render("component_form", {
+        title: "Create a Component",
+        categories: results.categories,
+        manufacturers: results.manufacturers,
+        isUpdating: false
+      })
+    }
+  )
+
 }
 
 exports.component_create_post = function(req, res) {

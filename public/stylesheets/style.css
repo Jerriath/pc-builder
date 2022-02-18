@@ -21,7 +21,7 @@ header.site-header {
   top: 0;
   width: 100%;
   height: 5rem;
-  background-color: lightslategray;
+  background-color: #101935;
   z-index: 99;
 }
 
@@ -49,13 +49,13 @@ header.site-header {
 }
 
 #nav-button:hover {
-  background-color: rgba(61, 61, 61, 0.2);
+  background-color: rgb(255, 228, 225, 0.3);
 }
 
 #nav-menu {
   position: absolute;
   padding: 1rem 2rem;
-  background-color: slategray;
+  background-color: #101935;
   right: 0;
   top: -10rem;
   transition: top 0.4s linear;
@@ -87,7 +87,7 @@ header.site-header {
 }
 
 .header-content a:hover {
-  background-color: rgba(61, 61, 61, 0.2);
+  background-color: rgb(255, 228, 225, 0.3);
 }
 
 .header-content span {
@@ -108,7 +108,7 @@ header.site-header {
 main {
   width: 100%;
   min-height: 100vh;
-  background-color:rgba(61, 61, 61, 0.5);
+  background-color: slategray;
   margin-top: 5rem;
 }
 
@@ -134,7 +134,7 @@ main {
 .main-header h1 {
   font-size: 2.25rem;
   font-family: Verdana, Geneva, Tahoma, sans-serif;
-  color: steelblue;
+  color: mistyrose;
   text-decoration: underline;
   font-weight: bold;
 }
@@ -144,7 +144,7 @@ main {
   padding: 0.5rem;
   border-radius: 5px;
   text-decoration: none;
-  color: steelblue;
+  color: #101935;
   transition: box-shadow 0.2s linear;
 }
 
@@ -250,7 +250,7 @@ main {
   background-color: mistyrose;
   border-radius: 5px;
   padding: 0.25rem;
-  color: lightslategray;
+  color: #101935;
   font-size: 1rem;
   border: 0;
   transition: box-shadow 0.2s linear;
@@ -260,7 +260,7 @@ main {
   box-shadow: 3px 3px 3px 3px rgba(0, 0, 0, 0.3);
 }
 
-.component-routes {
+.detail-routes {
   margin: 2rem auto;
   display: flex;
   justify-content: center;
@@ -356,7 +356,7 @@ main {
 .subtitle {
   font-size: 1.25rem;
   font-family: Verdana, Geneva, Tahoma, sans-serif;
-  color: steelblue;
+  color: #101935;
   text-decoration: underline;
   padding: 0 0.5rem;
   margin-bottom: 0.25rem;
@@ -388,7 +388,7 @@ fieldset {
 }
 
 fieldset legend {
-  color: mistyrose;
+  color: #101935;
   text-decoration: underline;
   padding: 0 2px;
   margin-left: 10px;
@@ -401,11 +401,11 @@ fieldset legend {
 }
 
 fieldset:focus-within input {
-  border: 3px solid steelblue;
+  border: 3px solid #101935;
 }
 
 fieldset:focus-within textarea {
-  border: 3px solid steelblue;
+  border: 3px solid #101935;
 }
 
 fieldset:focus-within legend {
@@ -430,7 +430,7 @@ fieldset:focus-within legend {
   }
 }
 
-input, textarea {
+input, textarea, select {
   box-sizing: border-box;
   width: 100%;
   padding: 1rem;
@@ -438,8 +438,9 @@ input, textarea {
   font-family: Verdana, Geneva, Tahoma, sans-serif;
   border-radius: 5px;
   border: 0px solid mistyrose;
-  background-color: lightgrey;
+  background-color: mistyrose;
   transition: border 0.2s linear;
+  color: #101935;
 }
 
 input,textarea:focus {
@@ -460,7 +461,7 @@ input,textarea:focus {
 }
 
 .form-btn:hover {
-  box-shadow: 2px 2px 2px 2px grey;
+  box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0.6);
 }
 
 .submit {
