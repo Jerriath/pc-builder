@@ -88,7 +88,21 @@ exports.manufacturer_create_post = [
 ]
 
 exports.manufacturer_delete_get = function(req, res) {
-    res.send("NOT IMPLEMENTED YET");
+    if (!mongoose.Types.ObjectId.isValid(req.params.id)) {
+        let err = new Error("Invalid ObjectID");
+        err.status = 404;
+        return next(err);
+    }
+    Manufacturer.findById(req.params.id).exec(function (err, manufacturer) {
+        if (err) { return next(err) }
+        if (manufacturer == null) {
+            let err = new ErrorEvent("Manufacturer not found");
+            err.status = 404;
+            return next(err);
+        }
+        res.render("manufacturer_delete", {manufacturer: manufacturer });    
+    })
+
 }
 
 exports.manufacturer_delete_post = function(req, res) {

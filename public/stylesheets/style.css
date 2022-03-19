@@ -29,7 +29,7 @@ header.site-header {
   display: flex;
   justify-content: space-between;
   min-width: 600px;
-  max-width: 60%;
+  max-width: 85%;
   margin: 0 auto;
   align-items: center;
   height: 100%;
@@ -114,7 +114,7 @@ main {
 
 .main-content {
   min-width: 700px;
-  max-width: 70%;
+  max-width: 85%;
   margin: auto;
   padding: 2rem 0;
 }
