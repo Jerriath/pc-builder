@@ -93,16 +93,36 @@ exports.manufacturer_delete_get = function(req, res) {
         err.status = 404;
         return next(err);
     }
-    Manufacturer.findById(req.params.id).exec(function (err, manufacturer) {
-        if (err) { return next(err) }
-        if (manufacturer == null) {
-            let err = new ErrorEvent("Manufacturer not found");
-            err.status = 404;
-            return next(err);
+    async.parallel(
+        {
+            manufacturer: function(callback) {
+                Manufacturer.findById(req.params.id).exec(callback)
+            },
+            components: function(callback) {
+                Component.find({manufacturer: req.params.id}).exec(callback)
+            }
+        },
+        function (err, results) {
+            if (err) { return next(err) }
+            if (results.manufacturer == null) {
+                let error = new Error("Manufacturer not found");
+                error.status = 404;
+                return (next(error));
+            }
+            let msg = "";
+            if (results.components.length > 0) {
+                msg = "You cannot delete this manufacturer unless you delete these components first. Click on the component to go to it's page."                
+            }
+            else {
+                msg = "Are you sure you want to delete this manufacturer. "
+            }
+            res.render("manufacturer_delete", {
+                manufacturer: results.manufacturer,
+                components: results.components,
+                msg: msg
+            })
         }
-        res.render("manufacturer_delete", {manufacturer: manufacturer });    
-    })
-
+    )
 }
 
 exports.manufacturer_delete_post = function(req, res) {
