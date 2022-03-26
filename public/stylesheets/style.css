@@ -398,14 +398,15 @@ fieldset legend {
   transition: 0.2s;
   position: relative;
   top: 25px;
+  z-index: 999;
 }
 
 fieldset:focus-within input {
-  border: 3px solid #101935;
+  border: 3px solid rgba(16, 25, 53, 0.8);
 }
 
 fieldset:focus-within textarea {
-  border: 3px solid #101935;
+  border: 3px solid rgba(16, 25, 53, 0.8);
 }
 
 fieldset:focus-within legend {
@@ -452,9 +453,6 @@ input,textarea:focus {
   padding: .75rem;
   margin: .5rem 0;
   font-size: 1.25rem;
-}
-
-.form-btn {
   border: none;
   border-radius: 5px;
   transition: box-shadow 0.2s linear;

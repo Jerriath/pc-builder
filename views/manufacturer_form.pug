@@ -14,8 +14,8 @@ block content
                         legend Description:
                         textarea(name="description" id="description" cols="30" rows="10" value=( manufacturer == undefined ? "" : manufacturer.description))
                     button.form-btn.submit(type="submit") Submit 
-                    a(href=(manufacturer == undefined ? "/manufacturers" : manufacturer.url))
-                        button.form-btn.cancel Cancel
+                a(style={margin: "0 25%"} href=(manufacturer == undefined ? "/catalog/manufacturers" : manufacturer.url))
+                    button.form-btn.cancel(style={width: "50%"}) Cancel
         if (!errors == undefined) 
             each err in errors 
                 li= err.msg
