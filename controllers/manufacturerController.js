@@ -114,7 +114,7 @@ exports.manufacturer_delete_get = function(req, res) {
                 msg = "You cannot delete this manufacturer unless you delete these components first. Click on the component to go to it's page."                
             }
             else {
-                msg = "Are you sure you want to delete this manufacturer. "
+                msg = "Are you sure you want to delete this manufacturer? "
             }
             res.render("manufacturer_delete", {
                 manufacturer: results.manufacturer,
@@ -125,8 +125,12 @@ exports.manufacturer_delete_get = function(req, res) {
     )
 }
 
-exports.manufacturer_delete_post = function(req, res) {
-    res.send("NOT IMPLEMENTED YET");
+exports.manufacturer_delete_post = function(req, res, next) {
+    Manufacturer.findByIdAndDelete(req.params.id)
+        .exec(function(err, next) {
+            if (err) { return next(err) }
+            res.redirect("/");
+        })
 }
 
 exports.manufacturer_update_get = function(req, res) {

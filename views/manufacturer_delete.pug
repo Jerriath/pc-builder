@@ -5,15 +5,16 @@ block content
         .main-content
             header.main-header
                 h1= manufacturer.name 
-            section
                 p.description= msg
+            section.list
                 if (components.length > 0) 
                     each component in components
-                        ul
-                            li= component.name 
+                        a.item(href=component.url)= component.name 
                 else 
-                    button.choose-category Delete 
-                    a.choose-category(href="/") Cancel
+                    form.basic-form(action="" method="POST")
+                        button.form-btn.choose-category(type="submit") Delete 
+                        a(href="/")
+                            button.form-btn.choose-category Cancel
         if (!errors == undefined) 
             each err in errors 
                 li= err.msg
