@@ -130,7 +130,8 @@ exports.manufacturer_delete_post = function(req, res, next) {
         .exec(function(err, next) {
             if (err) { return next(err) }
             res.redirect("/");
-        })
+        }
+    );
 }
 
 exports.manufacturer_update_get = function(req, res) {

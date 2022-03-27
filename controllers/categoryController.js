@@ -89,7 +89,41 @@ exports.category_create_post = [
 ]
 
 exports.category_delete_get = function(req, res) {
-    res.send("NOT IMPLEMENTED YET");
+    if (!mongoose.Types.ObjectId.isValid(req.params.id)) {
+        let err = new Error("Invalid ObjectID");
+        err.status = 404;
+        return next(err);
+    }
+    async.parallel(
+        {
+            category: function(callback) {
+                Category.findById(req.params.id).exec(callback)
+            },
+            components: function(callback) {
+                Component.find({category: req.params.id}).exec(callback)
+            }
+        },
+        function (err, results) {
+            if (err) { return next(err) }
+            if (results.category == null) {
+                let error = new Error("Category not found");
+                error.status = 404;
+                return (next(error));
+            }
+            let msg = "";
+            if (results.components.length > 0) {
+                msg = "You cannot delete this category unless you delete these components first. Click on a component to go to it's page."                
+            }
+            else {
+                msg = "Are you sure you want to delete this Category? "
+            }
+            res.render("category_delete", {
+                category: results.category,
+                components: results.components,
+                msg: msg
+            })
+        }
+    )
 }
 
 exports.category_delete_post = function(req, res) {
