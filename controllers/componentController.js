@@ -184,12 +184,36 @@ exports.component_create_post = [
   }
 ]
 
-exports.component_delete_get = function(req, res) {
-    res.send("NOT IMPLEMENTED YET");
+exports.component_delete_get = function(req, res, next) {
+  if (!mongoose.Types.ObjectId.isValid(req.params.id)) {
+    let err = new Error("Invalid ObjectID");
+    err.status = 404;
+    return next(err);
+  }
+  Component.findById(req.params.id)
+    .exec(function (err, component) {
+      if (err) { return next(err) }
+      if (component == null) {
+          let error = new Error("component not found");
+          error.status = 404;
+          return (next(error));
+      }
+      let msg = "Are you sure you want to delete this component?";
+      res.render("component_delete", {
+          component: component,
+          msg: msg
+      })
+    }
+  )
 }
 
 exports.component_delete_post = function(req, res) {
-    res.send("NOT IMPLEMENTED YET");
+  Component.findByIdAndDelete(req.params.id)
+    .exec(function(err, next) {
+      if (err) { return next(err) }
+      res.redirect("/");
+    }
+  );
 }
 
 exports.component_update_get = function(req, res) {
