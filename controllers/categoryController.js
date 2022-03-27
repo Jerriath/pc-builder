@@ -115,7 +115,7 @@ exports.category_delete_get = function(req, res) {
                 msg = "You cannot delete this category unless you delete these components first. Click on a component to go to it's page."                
             }
             else {
-                msg = "Are you sure you want to delete this Category? "
+                msg = "Are you sure you want to delete this category? "
             }
             res.render("category_delete", {
                 category: results.category,
@@ -127,7 +127,12 @@ exports.category_delete_get = function(req, res) {
 }
 
 exports.category_delete_post = function(req, res) {
-    res.send("NOT IMPLEMENTED YET");
+    Category.findByIdAndDelete(req.params.id)
+        .exec(function(err, next) {
+            if (err) { return next(err) }
+            res.redirect("/");
+        }
+    );
 }
 
 exports.category_update_get = function(req, res) {
