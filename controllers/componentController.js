@@ -208,7 +208,12 @@ exports.component_delete_get = function(req, res, next) {
 }
 
 exports.component_delete_post = function(req, res) {
-    res.send("NOT IMPLEMENTED YET");
+  Component.findByIdAndDelete(req.params.id)
+    .exec(function(err, next) {
+      if (err) { return next(err) }
+      res.redirect("/");
+    }
+  );
 }
 
 exports.component_update_get = function(req, res) {
