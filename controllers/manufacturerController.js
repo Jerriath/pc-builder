@@ -8,7 +8,7 @@ const async = require("async");
 const mongoose = require("mongoose");
 const { body, validationResult } = require("express-validator");
 
-exports.manufacturer_list = function(req, res) {
+exports.manufacturer_list = function(req, res, next) {
 
     Manufacturer.find({}).exec(function (err, manufacturers) {
         if (err) return next(err);
@@ -20,7 +20,7 @@ exports.manufacturer_list = function(req, res) {
 
 }
 
-exports.manufacturer_detail = function(req, res) {
+exports.manufacturer_detail = function(req, res, next) {
     if (!mongoose.Types.ObjectId.isValid(req.params.id)) {
         let err = new Error("Invalid ObjectID");
         err.status = 404;
@@ -134,8 +134,28 @@ exports.manufacturer_delete_post = function(req, res, next) {
     );
 }
 
-exports.manufacturer_update_get = function(req, res) {
-    res.send("NOT IMPLEMEMENTED YET");
+exports.manufacturer_update_get = function(req, res, next) {
+    if (!mongoose.Types.ObjectId.isValid(req.params.id)) {
+        let err = new Error("Invalid ObjectID");
+        err.status = 404;
+        return next(err);
+    }
+    else {
+        Manufacturer.findById(req.params.id)
+            .exec(function(err, manufacturer) {
+                if (err) { return next(err) }
+                if (manufacturer == null) {
+                    const err = new Error("Manufacturer not found");
+                    err.status = 404;
+                    return next(err);
+                }
+                res.render("manufacturer_form", { 
+                    title: "Update this manufacturer", 
+                    isUpdating: true, 
+                    manufacturer: manufacturer 
+                })
+            })
+    }
 }
 
 exports.manufacturer_update_post = function(req, res) {
