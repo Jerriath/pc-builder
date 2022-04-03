@@ -136,7 +136,27 @@ exports.category_delete_post = function(req, res) {
 }
 
 exports.category_update_get = function(req, res) {
-    res.send("NOT IMPLEMEMENTED YET");
+    if (!mongoose.Types.ObjectId.isValid(req.params.id)) {
+        let err = new Error("Invalid ObjectID");
+        err.status = 404;
+        return next(err);
+    }
+    else {
+        Category.findById(req.params.id)
+            .exec(function(err, category) {
+                if (err) { return next(err) }
+                if (category == null) {
+                    const err = new Error("Category not found");
+                    err.status = 404;
+                    return next(err);
+                }
+                res.render("category_form", { 
+                    title: "Update this category", 
+                    isUpdating: true, 
+                    category: category 
+                })
+            })
+    }
 }
 
 exports.category_update_post = function(req, res) {

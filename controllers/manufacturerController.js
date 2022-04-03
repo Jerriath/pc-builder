@@ -158,6 +158,43 @@ exports.manufacturer_update_get = function(req, res, next) {
     }
 }
 
-exports.manufacturer_update_post = function(req, res) {
-    res.send("NOT IMPLEMENTED YET");
-}
+exports.manufacturer_update_post = [
+    body("name")
+        .trim()
+        .isLength({min: 1})
+        .escape()
+        .withMessage("Must provide a manufacturer name"),
+    body("description").optional({checkfalsy: true}),
+    (req, res, next) => {
+       const errors = validationResult(req);
+       if (!errors.isEmpty()) {
+           res.render("manufacturer_form", {
+               title: "Add a manufacturer",
+               manufacturer: req.body,
+               isUpdating: false,
+               errors: errors.array()
+           })
+           return;
+       } 
+       else {
+            Manufacturer.findById(req.params.id)
+                .exec(function (error, manufacturer) {
+                    if (error) {
+                        return next(error);
+                    }
+                    manufacturer.name = req.body.name;
+                    manufacturer.description = req.body.description;
+                    manufacturer.save(function (error) {
+                        if (error) {
+                            console.log("error");
+                            return next(error);
+                        }
+                        else {
+                            console.log("success");
+                            res.redirect(manufacturer.url);
+                        }
+                    })
+                })
+       }
+    }
+]
