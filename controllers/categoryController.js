@@ -267,7 +267,7 @@ exports.manufacturer_update_post = [
         .trim()
         .isLength({min: 1})
         .escape()
-        .withMessage("Must provide a cagtegory name"),
+        .withMessage("Must provide a category name"),
     body("description").optional({checkfalsy: true}),
     (req, res, next) => {
        const errors = validationResult(req);

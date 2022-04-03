@@ -12,7 +12,7 @@ block content
                         input(type="text" required name="name" id="name" value=(component == undefined ? "" : component.name)) 
                     fieldset 
                         legend Description:
-                        textarea(name="description" id="description" cols="30" rows="10" value=(component == undefined ? "" : component.description))
+                        textarea(name="description" id="description" cols="30" rows="10")= component == undefined ? "" : component.description
                     fieldset 
                         legend Stock 
                         input(type="number" required name="stock" id="stock" value=(component == undefined ? null : component.stock))
@@ -24,7 +24,7 @@ block content
                         select#category(name="category") 
                             option(value="none" selected=(component == undefined ? true : false) disabled hidden) Select an Option
                             each category in categories
-                                option(value=category._id selected=(component == undefined ? false : (component.manufacturer.name == manufacturer.name ? true : false)))= category.name
+                                option(value=category._id selected=(component == undefined ? false : (component.category.name == category.name ? true : false)))= category.name
                     fieldset 
                         legend Manufacturer
                         select#manufacturer(name="manufacturer") 
