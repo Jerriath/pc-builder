@@ -87,7 +87,7 @@ exports.component_detail = function(req, res, next) {
       }
       let details = component.description.split(",");
       res.render("component_detail", {
-        title: component.name + " Details",
+        title: component.name,
         component: component,
         details: details
       })
@@ -217,9 +217,87 @@ exports.component_delete_post = function(req, res) {
 }
 
 exports.component_update_get = function(req, res) {
-    res.send("NOT IMPLEMEMENTED YET");
+  if (!mongoose.Types.ObjectId.isValid(req.params.id)) {
+    let err = new Error("Invalid ObjectID");
+    err.status = 404;
+    return next(err);
+  }
+  else {
+    async.parallel(
+      {
+        component: function(callback) {
+          Component.findById(req.params.id).populate("manufacturer", "category").exec(callback);
+        },
+        categories: function(callback) {
+          Category.find({}).exec(callback);
+        },
+        manufacturers: function(callback) {
+          Manufacturer.find({}).exec(callback);
+        }
+      },
+      function(err, results) {
+        if (err) { return next(err); }
+  
+        res.render("component_form", {
+          title: "Update this Component",
+          categories: results.categories,
+          manufacturers: results.manufacturers,
+          component: results.component,
+          isUpdating: true
+        })
+      }
+    )
+  } 
 }
 
-exports.component_update_post = function(req, res) {
-    res.send("NOT IMPLEMENTED YET");
-}
+exports.component_update_post = [
+  body("name")
+    .trim()
+    .isLength({min: 1})
+    .escape()
+    .withMessage("Must provide a Component name"),
+  body("description").optional({checkfalsy: true}),
+  body("stock", "Stock must be more than 0 (zero)")
+    .isInt({min: 0, max: 99999})
+    .escape(),
+  body("price", "Price must be between $0 and $999999")
+    .isFloat({min: 0, max: 999999})
+    .escape(),
+  body("category", "Please select a category")
+    .trim()
+    .escape(),
+  body("manufacturer", "Please select a manufacturer")
+    .trim()
+    .escape(),
+  (req, res, next) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      res.render("component_form", {
+        title: "Add a component",
+        component: req.body,
+        isUpdating: false,
+        errors: errors.array()
+      })
+      return;
+    } 
+    Component.findById(req.params.id).exec(function(err, component) {
+      if (err) { return next(err); }
+      component.name = req.body.name;
+      component.description = req.body.description;
+      component.stock = req.body.stock;
+      component.price = req.body.price;
+      component.category = req.body.category;
+      component.manufacturer = req.body.manufacturer;
+      component.save(function (error) {
+        if (error) {
+          console.log("error");
+          return next(error);
+        }
+        else {
+          console.log("success");
+          res.redirect(component.url);
+        }
+      })
+    })
+  }
+]

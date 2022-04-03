@@ -12,7 +12,7 @@ block content
                         input(type="text" required name="name" id="name" value=(manufacturer == undefined ? "" : manufacturer.name)) 
                     fieldset 
                         legend Description:
-                        textarea(name="description" id="description" cols="30" rows="10" value=( manufacturer == undefined ? "" : manufacturer.description))
+                        textarea(name="description" id="description" cols="30" rows="10")= manufacturer == undefined ? "" : manufacturer.description
                     button.form-btn.submit(type="submit") Submit 
                 a(style={margin: "0 25%"} href=(manufacturer == undefined ? "/catalog/manufacturers" : manufacturer.url))
                     button.form-btn.cancel(style={width: "50%"}) Cancel

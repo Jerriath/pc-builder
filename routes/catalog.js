@@ -6,12 +6,6 @@ const component_controller = require("../controllers/componentController");
 const manufacturer_controller = require("../controllers/manufacturerController");
 const category_controller = require("../controllers/categoryController");
 
-//Declaring function to get stored parts
-const getStoredParts = (req, next) => {
-    let list = [];
-    
-}
-
 
 // ----- COMPONENT ROUTERS ----- //
 
