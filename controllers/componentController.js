@@ -294,13 +294,8 @@ exports.component_update_post = [
           return next(error);
         }
         else {
-          let details = component.description.split(",");
           console.log("success");
-          res.render("component_detail", {
-            title: component.name,
-            component: component,
-            details: details
-          })
+          res.redirect(component.url);
         }
       })
     })
