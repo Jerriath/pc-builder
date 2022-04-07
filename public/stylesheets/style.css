@@ -173,11 +173,11 @@ main {
 }
 
 .catalog-row h2:nth-child(1) {
-  width: 15%;
+  width: max(15%, 175px);
 }
 
 .catalog-row h2:nth-child(2) {
-  width: 50%;
+  width: max(50%, 300px);
 }
 
 .catalog-row h2:nth-child(3) {

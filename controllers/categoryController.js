@@ -173,7 +173,7 @@ exports.category_update_post = [
            res.render("manufacturer_form", {
                title: "Add a manufacturer",
                manufacturer: req.body,
-               isUpdating: false,
+               isUpdating: true,
                errors: errors.array()
            })
            return;
