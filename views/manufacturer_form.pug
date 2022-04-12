@@ -13,6 +13,10 @@ block content
                     fieldset 
                         legend Description:
                         textarea(name="description" id="description" cols="30" rows="10")= manufacturer == undefined ? "" : manufacturer.description
+                    if (isUpdating)
+                        fieldset   
+                            legend Admin Password: 
+                            input(type="password" required name="password" id="password")
                     button.form-btn.submit(type="submit") Submit 
                 a(style={margin: "0 25%"} href=(manufacturer == undefined ? "/catalog/manufacturers" : manufacturer.url))
                     button.form-btn.cancel(style={width: "50%"}) Cancel
