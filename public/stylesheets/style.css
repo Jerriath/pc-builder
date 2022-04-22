@@ -2,13 +2,9 @@
 
   I.   Header Styles
   II.  Catalog Styles
-  III. Category Styles
-    a. Category_Details
-  IV.  Component Styles
-    a. Component Details
-  V.   Manufacturer Styles
-    a. Manufacturer Details
-  VI.  General Layout Styles
+  III. Schema Styles
+  IV.  General Layout Styles
+  V.   Footer Styles
 
   ---------- Table of Contents ----------*/
 
@@ -207,13 +203,7 @@ main {
 
 
 
-/* ----- Category Styles ----- */
-
-
-
-
-
-/* ----- Component Styles ----- */
+/* ----- Schema Styles ----- */
 
 .component-row {
   display: flex;
@@ -302,12 +292,6 @@ main {
   font-family: Verdana, Geneva, Tahoma, sans-serif;
   font-weight: bold;
 }
-
-
-
-/* ----- Manufacturer Styles ----- */
-
-
 
 
 
@@ -468,4 +452,71 @@ input,textarea:focus {
 
 .cancel {
   background-color: rgb(114, 152, 184);
+}
+
+
+
+/* ----- Footer Styles ----- */
+
+#footer {
+  background: #101935;
+}
+
+.footer-content {
+  display: flex;
+  flex-direction: column;
+  min-width: 600px;
+  max-width: 66%;
+  margin: 0 auto;
+  padding: 2rem 0;
+}
+
+.footer-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: solid 1px mistyrose;
+}
+
+.footer-header a {
+  font-size: 2rem;
+  color: mistyrose;
+  font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  font-weight: bold;
+  padding: 0.5rem;
+  border-radius: 10px;
+  transition: background-color 0.2s linear;
+}
+
+.footer-header a:hover {
+  background-color: rgb(255, 228, 225, 0.3);
+}
+
+.footer-header img {
+  content: url("../images/github_logo.png");
+  max-width: 4rem;
+  height: auto;
+}
+
+.footer-list {
+  display: flex;
+  flex-direction: column;
+  padding: 1rem 0;
+}
+
+.footer-list li {
+  padding: 0.5rem 0;
+}
+
+.footer-list li a {
+  font-size: 1.25rem;
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  color: mistyrose;
+  border-radius: 5px;
+  padding: 0.25rem 0.25rem;
+  transition: background 0.2s linear;
+}
+
+.footer-list li a:hover {
+  background: rgb(255, 228, 225, 0.3);
 }
