@@ -8,6 +8,9 @@ block content
                 p.description= msg
             section.list
                 form.basic-form(action="" method="POST")
+                    fieldset   
+                        legend Admin Password: 
+                        input(type="password" required name="password" id="password")
                     button.form-btn.choose-category(type="submit") Delete 
                     a(href="/")
                         button.form-btn.choose-category Cancel
