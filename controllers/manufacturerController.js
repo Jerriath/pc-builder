@@ -164,37 +164,50 @@ exports.manufacturer_update_post = [
         .isLength({min: 1})
         .escape()
         .withMessage("Must provide a manufacturer name"),
-    body("description").optional({checkfalsy: true}),
+    body("description")
+        .trim()
+        .escape()
+        .optional({checkfalsy: true}),
+    body("password")
+        .trim()
+        .isLength({min: 1})
+        .escape()
+        .withMessage("Must provide password to update"),
     (req, res, next) => {
-       const errors = validationResult(req);
-       if (!errors.isEmpty()) {
-           res.render("manufacturer_form", {
-               title: "Add a manufacturer",
-               manufacturer: req.body,
-               isUpdating: false,
-               errors: errors.array()
-           })
-           return;
-       } 
-       else {
+        const errors = validationResult(req);
+        if (!errors.isEmpty()) {
+            res.render("manufacturer_form", {
+                title: "Add a manufacturer",
+                manufacturer: req.body,
+                isUpdating: true,
+                errors: errors.array()
+            })
+            return;
+        } 
+       else if (req.body.password == process.env.DB_PASSWORD) {
             Manufacturer.findById(req.params.id)
-                .exec(function (error, manufacturer) {
+            .exec(function (error, manufacturer) {
+                if (error) {
+                    return next(error);
+                }
+                manufacturer.name = req.body.name;
+                manufacturer.description = req.body.description;
+                manufacturer.save(function (error) {
                     if (error) {
+                        console.log("error");
                         return next(error);
                     }
-                    manufacturer.name = req.body.name;
-                    manufacturer.description = req.body.description;
-                    manufacturer.save(function (error) {
-                        if (error) {
-                            console.log("error");
-                            return next(error);
-                        }
-                        else {
-                            console.log("success");
-                            res.redirect(manufacturer.url);
-                        }
-                    })
+                    else {
+                        console.log("success");
+                        res.redirect(manufacturer.url);
+                    }
                 })
-       }
+            })
+        }
+        else {
+            let err = new Error("Looks like you entered the wrong password.");
+            err.status = 403;
+            return next(err);
+        }
     }
 ]

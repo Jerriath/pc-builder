@@ -275,7 +275,7 @@ exports.component_update_post = [
       res.render("component_form", {
         title: "Add a component",
         component: req.body,
-        isUpdating: false,
+        isUpdating: true,
         errors: errors.array()
       })
       return;

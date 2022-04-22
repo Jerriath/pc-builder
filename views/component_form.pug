@@ -31,6 +31,10 @@ block content
                             option(value="none" selected=(component == undefined ? true : false) disabled hidden) Select an Option
                             each manufacturer in manufacturers
                                 option(value=manufacturer._id selected=(component == undefined ? false : (component.manufacturer.name == manufacturer.name ? true : false)))= manufacturer.name
+                    if (isUpdating)
+                        fieldset   
+                            legend Admin Password: 
+                            input(type="password" required name="password" id="password")
                     button.form-btn.submit(type="submit") Submit 
                     a(href=(component == undefined ? "/categories" : component.url))
                         button.form-btn.cancel Cancel
